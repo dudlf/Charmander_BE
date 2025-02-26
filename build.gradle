@@ -1,19 +1,39 @@
 plugins {
     id 'java'
+    id 'java-library' // api 의존성 사용을 위해
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
 }
 
-group = 'org.cm'
-version = '1.0-SNAPSHOT'
+allprojects {
+    group = "${projectGroup}"
+    version = "${applicationVersion}"
+    sourceCompatibility = project.javaVersion
 
-repositories {
-    mavenCentral()
+    dependencies {
+        // https://mvnrepository.com/artifact/org.jspecify/jspecify
+        implementation 'org.jspecify:jspecify:1.0.0'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    repositories { mavenCentral()}
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
 }
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-test {
-    useJUnitPlatform()
+    bootJar.enabled= true
+    jar.enabled = true
+    dependencies {
+
+    }
 }
