@@ -1,14 +1,18 @@
+
 plugins {
     id 'java'
-    id 'java-library' // api 의존성 사용을 위해
-    id 'org.springframework.boot' version "${springBootVersion}"
-    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    // api 의존성 사용을 위해
+    id 'java-library'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 allprojects {
-    group = "${projectGroup}"
-    version = "${applicationVersion}"
-    sourceCompatibility = project.javaVersion
+
+    apply plugin: 'java-library'
+    group = 'Charmander'
+    version = '0.0.1'
+
 
     dependencies {
         // https://mvnrepository.com/artifact/org.jspecify/jspecify
@@ -19,8 +23,7 @@ allprojects {
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
 
-    repositories { mavenCentral()}
-
+    repositories { mavenCentral() }
     tasks.named('test') {
         useJUnitPlatform()
     }
