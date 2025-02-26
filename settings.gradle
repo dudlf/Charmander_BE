@@ -1,2 +1,5 @@
 rootProject.name = 'Charmander'
 
+include 'charmander-domain:charmander-domain-common'
+include 'charmander-domain:charmander-domain-core'
+
