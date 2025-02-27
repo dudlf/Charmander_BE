@@ -1,5 +1,6 @@
 package org.cm.domain.common;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -16,6 +17,9 @@ public class Member extends BaseEntity {
     private PersonalInfo personalInfo;
 
     private String phoneNumber;
+
+    @Column(nullable = true)
+    public String profileImage;
 
     //약관동의를 한 유저라는것을 컬럼으로 나타내야하는가
 
